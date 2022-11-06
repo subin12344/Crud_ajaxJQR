@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,78 +10,213 @@
 </head>
 
 <body>
-  
-<div class="container">
-  <!-- Button trigger modal -->
-  <div class="regs d-flex justify-content-end pt-5">
-    <div class="search">
-      <input type="Search form-control" placeholder="Search">
-      <button class="btn btn-disable">Search</button>
+
+  <div class="container">
+    <!-- Button trigger modal -->
+    <div class="regs d-flex justify-content-end pt-5">
+      <div class="search">
+        <input type="Search form-control" placeholder="Search">
+        <button class="btn btn-disable">Search</button>
+      </div>
+      <button type="button" class="btn btn-success btn-sm col-1 ms-auto" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        Register
+      </button>
     </div>
-    <button type="button" class="btn btn-success btn-sm col-1 ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Register
-     </button>
+
+    <table class="table table-bordered mt-3">
+
+
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Register Your Details</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="" method="POST" enctype="multipart/form-data" id="form">
+              <input type="hidden" id="id" name="id">
+
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
+
+              <div class="row pt-3">
+                <div class="col-6">
+                  <input type="text" class="form-control " id="mail" name="mail" placeholder="Email">
+                </div>
+                <div class="col-6">
+                  <input type="text" class="form-control " id="phone" name="phone" placeholder="Phone Number">
+                </div>
+              </div>
+
+              <div class="row pt-3">
+                <div class="col-6">
+                  <input type="text" class="form-control " id="ntv" name="ntv" placeholder="Native">
+                </div>
+                <div class="col-6">
+                  <input type="file" class="form-control" id="img" name="img" placeholder="Your photo">
+                </div>
+              </div>
+
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="submit" class=" btn btn-success my-3 " id="update" data-bs-dismiss="modal">edit</button>
+            <!-- <button type="button" class="btn btn-primary" id="insertBtn">INSERT</button> -->
+            <input type="submit" class=" btn btn-success my-3 " data-bs-dismiss="modal" id="insertBtn" name="upload" value="upload">
+
+
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <table class="table table-bordered mt-3">
- <tr>
-  <th>Name</th>
-  <th>Email</th>
-  <th>Phone Number</th>
-  <th>Native</th>
-  <th>Photo</th>
-  <th>Action</th>
- </tr>
-
-  </table>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Register Your Details</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-  <form action="" class="form" method="POST" enctype="multipart/form-data" id="form">
-
-    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
-
-<div class="row pt-3">
-  <div class="col-6">
-    <input type="text" class="form-control " id="mail" name="mail" placeholder="Email">
-  </div>
-  <div class="col-6">
-    <input type="text" class="form-control " id="phone" name="phone" placeholder="Phone Number">
-    </div>
-  </div>
-
-  <div class="row pt-3">
-    <div class="col-6">
-      <input type="text" class="form-control " id="ntv" name="ntv" placeholder="Native">
-    </div>
-    <div class="col-6">
-      <input type="file" class="form-control" id="img" name="img" placeholder="Your photo">
-      </div>
-    </div>
-  </form>
-
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="insertBtn">INSERT</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-  <script src="jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js.js"></script>
+  <script>
+
+
+
+    $(document).ready(function () {
+      getdata();
+      function getdata() {
+        $.ajax({
+          url: "tabledata.php",
+          type: "post",
+          data: {action:"getdata"},
+          success: function (data) {
+            $(".table").html(data);
+            
+          }
+        })
+      }
+
+
+      $("#insertBtn").click(function(){
+        $("#form").reset();
+      })
+
+
+      //  var formdata=$("#form").serializeArray();
+      $("#form").on("submit", function (e) {
+        e.preventDefault();
+        // alert("hubvvvf");
+
+        var form_data = new FormData(this);
+        console.log(form_data);
+        $.ajax({
+          url: "insert.php",
+          type: "post",
+          data: form_data,
+          dataType: "JSON",
+          processData: false,
+          // cache: false,
+          contentType: false,
+          success: function (data) {
+            // console.log(data);
+            getdata();
+          }
+        });
+      })
+    
+      $(".table").on("click",".edit",function(){
+        var id=$(this).attr("data-id");
+        // console.log(id);
+        $.ajax({
+          url:"showdata.php",
+          type:"post",
+          data:{id:id},
+          success:function(data){
+            var newdata=JSON.parse(data);
+            // console.log(newdata);
+            $("#id").val(newdata.id);
+            $("#name").val(newdata.name);
+            $("#mail").val(newdata.email);
+            $("#phone").val(newdata.phone);
+            $("#ntv").val(newdata.native);
+            $("#img").val(newdata.photo);
+            getdata();
+
+          }
+        })
+      })
+      $("#update").click(function(){
+        $("#form").on("submit", function (e) {
+        e.preventDefault();
+        // alert("hubvvvf");
+
+        var form_data = new FormData(this);
+        console.log(form_data);
+        $.ajax({
+          url: "update.php",
+          type: "post",
+          data: form_data,
+          dataType: "JSON",
+          processData: false,
+          // cache: false,
+          contentType: false,
+          success: function (data) {
+            // console.log(data);
+            getdata();
+          }
+        });
+      })
+
+
+
+
+        // $("#form").on("click","#update", function (e) {
+        // e.preventDefault();
+        // alert("hubvvvf");
+      //  var form_data=$("#form").serializeArray();
+
+
+      //   // var form_data = new FormData(this);
+      //   console.log(form_data);
+      //   $.ajax({
+      //     url: "update.php",
+      //     type: "post",
+      //     data: form_data,
+      //     // dataType: "JSON",
+      //     // processData: false,
+      //     // cache: false,
+      //     // contentType: false,
+      //     success: function (data) {
+      //       // console.log(data);
+      //       getdata();
+      //     }
+      //   });
+
+
+
+      })
+      $(".table").on("click",".delete",function(){
+        var id=$(this).attr("data-id");
+
+        $.ajax({
+          url:"delete.php",
+          type:"post",
+          data:{id:id},
+          success:function (){
+            getdata();
+
+          }
+        })
+
+      })
+
+      })
+      
+    // })
+  </script>
 </body>
+
 </html>
