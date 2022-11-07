@@ -17,20 +17,15 @@
       <input type="Search form-control" placeholder="Search">
       <button class="btn btn-disable">Search</button>
     </div>
-    <button type="button" class="btn btn-success btn-sm col-1 ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    
+    <button type="button" class="btn btn-success btn-sm col-1 ms-auto" data-bs-toggle="modal"  id="register" data-bs-target="#exampleModal">
       Register
      </button>
   </div>
+  <p id="result" style="color: red;"></p>
 
   <table class="table table-bordered mt-3">
- <tr>
-  <th>Name</th>
-  <th>Email</th>
-  <th>Phone Number</th>
-  <th>Native</th>
-  <th>Photo</th>
-  <th>Action</th>
- </tr>
+
 
   </table>
 
@@ -43,7 +38,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+      
   <form action="" class="form" method="POST" enctype="multipart/form-data" id="form">
+    <input type="hidden" name="id" id="id">
 
     <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
 
@@ -60,17 +57,17 @@
     <div class="col-6">
       <input type="text" class="form-control " id="ntv" name="ntv" placeholder="Native">
     </div>
-    <div class="col-6">
+    <!-- <div class="col-6">
       <input type="file" class="form-control" id="img" name="img" placeholder="Your photo">
-      </div>
+      </div> -->
     </div>
   </form>
 
       </div>
       
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="insertBtn">INSERT</button>
+        <button type="button" class="btn btn-primary"   data-bs-dismiss="modal" id="update" >update</button>
+        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" id="insertBtn">INSERT</button>
       </div>
     </div>
   </div>
