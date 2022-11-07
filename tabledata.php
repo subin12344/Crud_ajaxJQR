@@ -19,8 +19,8 @@ while($row=$result->fetch_assoc()){
     <td>$row[native]</td>
     <td><img src='$row[photo]' alt='photo err'></td>
     <td>
-    <button  class=' btn btn-success my-3 edit ' data-bs-toggle='modal'data-bs-target='#exampleModal'z data-id='$row[id]'> edit</button>
-    <button class=' btn btn-success my-3  delete'   data-id='$row[id]'>delete</button>
+    <button  class='btn btn-warning edit ' data-bs-toggle='modal'data-bs-target='#exampleModal' data-id='$row[id]'> edit</button>
+    <button class='btn btn-danger  delete'   data-id='$row[id]'>delete</button>
     
     </td>
    </tr>";

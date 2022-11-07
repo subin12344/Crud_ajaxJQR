@@ -65,9 +65,10 @@
           </div>
 
           <div class="modal-footer">
-            <button type="submit" class=" btn btn-success my-3 " id="update" data-bs-dismiss="modal">edit</button>
+            <button type="submit" class=" btn btn-success my-3 " id="update" data-bs-dismiss="modal">update</button>
             <!-- <button type="button" class="btn btn-primary" id="insertBtn">INSERT</button> -->
-            <input type="submit" class=" btn btn-success my-3 " data-bs-dismiss="modal" id="insertBtn" name="upload" value="upload">
+            <input type="submit" class=" btn btn-success my-3 " data-bs-dismiss="modal" id="insertBtn" name="upload"
+              value="insert">
 
 
           </div>
@@ -87,22 +88,22 @@
 
     $(document).ready(function () {
       getdata();
+
       function getdata() {
         $.ajax({
           url: "tabledata.php",
           type: "post",
-          data: {action:"getdata"},
           success: function (data) {
             $(".table").html(data);
-            
+
           }
-        })
+        });
       }
 
 
-      $("#insertBtn").click(function(){
-        $("#form").reset();
-      })
+      // $("#insertBtn").click(function(){
+      //   $("#form").reset();
+      // });
 
 
       //  var formdata=$("#form").serializeArray();
@@ -114,28 +115,28 @@
         console.log(form_data);
         $.ajax({
           url: "insert.php",
-          type: "post",
+          type: "POST",
           data: form_data,
-          dataType: "JSON",
+          // dataType: "JSON",
           processData: false,
-          // cache: false,
+          cache: false,
           contentType: false,
           success: function (data) {
-            // console.log(data);
+            console.log(data);
             getdata();
           }
         });
-      })
-    
-      $(".table").on("click",".edit",function(){
-        var id=$(this).attr("data-id");
+      });
+
+      $(".table").on("click", ".edit", function () {
+        var id = $(this).attr("data-id");
         // console.log(id);
         $.ajax({
-          url:"showdata.php",
-          type:"post",
-          data:{id:id},
-          success:function(data){
-            var newdata=JSON.parse(data);
+          url: "showdata.php",
+          type: "post",
+          data: { id: id },
+          success: function (data) {
+            var newdata = JSON.parse(data);
             // console.log(newdata);
             $("#id").val(newdata.id);
             $("#name").val(newdata.name);
@@ -148,56 +149,57 @@
           }
         })
       })
-      $("#update").click(function(){
-        $("#form").on("submit", function (e) {
+      // $("#update").click(function(){
+      //   $("#form").on("submit", function (e) {
+      //   e.preventDefault();
+      //   // alert("hubvvvf");
+
+      //   var form_data = new FormData(this);
+      //   console.log(form_data);
+      //   $.ajax({
+      //     url: "update.php",
+      //     type: "post",
+      //     data: form_data,
+      //     dataType: "JSON",
+      //     processData: false,
+      //     // cache: false,
+      //     contentType: false,
+      //     success: function (data) {
+      //       // console.log(data);
+      //       getdata();
+      //     }
+      //   });
+      // })
+
+
+
+
+      $("#form").on("submit", function (e) {
         e.preventDefault();
         // alert("hubvvvf");
+        //  var form_data=$("#form").serializeArray();
+
 
         var form_data = new FormData(this);
         console.log(form_data);
         $.ajax({
           url: "update.php",
           type: "post",
-          data: form_data,
-          dataType: "JSON",
+          data:form_data,
+          // dataType: "JSON",
           processData: false,
-          // cache: false,
+          cache: false,
           contentType: false,
           success: function (data) {
-            // console.log(data);
+            console.log(data);
             getdata();
+            $("#form"),reset();
           }
         });
-      })
+      });
 
-
-
-
-        // $("#form").on("click","#update", function (e) {
-        // e.preventDefault();
-        // alert("hubvvvf");
-      //  var form_data=$("#form").serializeArray();
-
-
-      //   // var form_data = new FormData(this);
-      //   console.log(form_data);
-      //   $.ajax({
-      //     url: "update.php",
-      //     type: "post",
-      //     data: form_data,
-      //     // dataType: "JSON",
-      //     // processData: false,
-      //     // cache: false,
-      //     // contentType: false,
-      //     success: function (data) {
-      //       // console.log(data);
-      //       getdata();
-      //     }
-      //   });
-
-
-
-      })
+      
+  
       $(".table").on("click",".delete",function(){
         var id=$(this).attr("data-id");
 
@@ -211,11 +213,12 @@
           }
         })
 
-      })
+      });
 
       })
-      
-    // })
+
+ 
+  
   </script>
 </body>
 

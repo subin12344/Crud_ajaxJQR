@@ -2,10 +2,10 @@
 include 'db.php';
 $file=$_FILES['img']['name'];
 print_r($_FILES);
-$id=$_POST['id'];
+// $id=$_POST['id'];
 // print_r($_POST);
 extract($_POST);
-$sql="UPDATE `std_info` SET name='$name',email='$mail',phone='$phone',native='$ntv' WHERE id='$id'";
+$sql="UPDATE `std_info` SET `name`='$name',`email`='$mail',`phone`='$phone',`native`='$ntv' WHERE `id`='$id'";
 
 $result=$db->query($sql);
 
