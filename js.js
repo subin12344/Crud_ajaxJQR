@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $(document).ready(function () {
     $("#register").click(function () {
         $("#insertBtn").show();
@@ -65,8 +66,36 @@ $(document).ready(function () {
             }
         })
     });
+=======
+$(document).ready(function(){
+    alert("hubvvvf");
+
+$("#insertBtn").click(function(){
+    
+    // //  var formdata=$("#form").serializeArray();
+    //  $("#form").on("submit",function(e){
+    //     e.preventDefault();
+     
+    // //     var form_data=new FormData(this);
+    // // //  console.log(formdata);
+    // // $.ajax({
+    // //     url:"insert.php",
+    // //     type:"post",
+    // //     data:form_data,
+    // //     dataType:"JSON",
+    // //     processData:false,
+    // //     cache:false,
+    // //     contentType:false,
+    // //     success:function(data){
+    // //         console.log(data);
+    // //     }
+    // });
+})
+    
+>>>>>>> 608a3ca352c094937377264790b0c40b582fcde4
 
 
+<<<<<<< HEAD
     $("#update").click(function () {
         var formdata = $("#form").serializeArray();
         //  console.log(formdata);
@@ -113,3 +142,6 @@ $(document).ready(function () {
         })
     })
 });
+=======
+// // });
+>>>>>>> 608a3ca352c094937377264790b0c40b582fcde4
